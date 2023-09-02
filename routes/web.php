@@ -90,8 +90,9 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/signin', [SigninController::class,'index'])->middleware('guest');
 Route::get('/signup', [SigninController::class,'signup'])->middleware('guest')->name('signup');
+Route::post('/daftar', [SigninController::class,'daftar'])->middleware('guest')->name('daftar');
 
 Route::post('/signin', [SigninController::class, 'signin'])->middleware('guest')->name('signin');
 Route::get('/logout', [SigninController::class, 'logout'])->name('logout');
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';

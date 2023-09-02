@@ -13,6 +13,10 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    auth: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 const form = useForm({
     product_id: props.product.id,
@@ -24,7 +28,7 @@ const addToCart = () => {
 };
 </script>
 <template>
-    <Layout :carts="carts">
+    <Layout :carts="carts" :auth="auth">
         <div
             class="min-w-screen min-h-screen bg-light-tail-100 dark:bg-dark-nav-100 flex items-center p-5 lg:p-10 overflow-hidden relative"
         >

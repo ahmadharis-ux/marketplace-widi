@@ -68,7 +68,7 @@ const props = defineProps({
             </ul>
         </div>
 
-        <div class="navbar-end">
+        <div class="navbar-end" v-if="auth != null">
             <div class="indicator">
                 <div class="drawer drawer-end">
                     <input
@@ -225,9 +225,11 @@ const props = defineProps({
                 <ul class="menu menu-horizontal px-1">
                     <li tabindex="0">
                         <details>
-                            <summary>Ahmad Harius</summary>
+                            <summary>{{ auth.name }}</summary>
                             <ul class="p-2">
-                                <li><a>Logout</a></li>
+                                <li>
+                                    <Link :href="route('logout')">Logout</Link>
+                                </li>
                                 <li><a>Profile</a></li>
                             </ul>
                         </details>
@@ -241,7 +243,7 @@ const props = defineProps({
                 </div>
             </label>
         </div>
-        <!-- <div class="navbar-end">
+        <div class="navbar-end" v-if="auth == null">
             <div class="navbar-center lg:flex">
                 <Link
                     :href="route('signin')"
@@ -254,6 +256,6 @@ const props = defineProps({
                     >Sign Up</Link
                 >
             </div>
-        </div> -->
+        </div>
     </div>
 </template>

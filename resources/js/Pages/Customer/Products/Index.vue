@@ -17,6 +17,10 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    auth: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 let selectedCategory = null;
 
@@ -34,7 +38,7 @@ const filteredProducts = computed(() => {
 });
 </script>
 <template>
-    <Layout :carts="carts">
+    <Layout :carts="carts" :auth="auth">
         <div
             class="bg-light-primary dark:bg-dark-nav-500 text-light-tail-500 dark:text-dark-second"
         >

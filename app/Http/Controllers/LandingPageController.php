@@ -20,7 +20,7 @@ class LandingPageController extends Controller
             'carts' => Cart::with('product')->get(),
             'heroes' => Hero::all(),
             'contact' => Contact::all(),
-            'auth' => Auth::user(),
+            'auth' => auth()->user(),
         ]);
     }
     function indexProducts(){
@@ -29,13 +29,14 @@ class LandingPageController extends Controller
             'products' => Products::latest()->get(),
             'categories' => Categories::all(),
             'carts' => Cart::with('product')->get(),
+            'auth' => auth()->user(),
         ]);
     }
     function showProduct($id){
         return Inertia::render('Customer/Products/Product',[
             'product' => Products::findOrFail($id),
             'carts' => Cart::with('product')->latest()->get(),
-
+            'auth' => auth()->user(),
         ]);
     }
     function addToCart(Request $request){

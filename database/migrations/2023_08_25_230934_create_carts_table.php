@@ -16,9 +16,11 @@ return new class extends Migration
             $table->foreignId('product_id');
             $table->integer('amount')->nullable();
             $table->integer('qty')->nullable();
+            $table->foreignId('author')->unsigned();
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('author')->references('id')->on('users');
         });
     }
 

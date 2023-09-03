@@ -21,6 +21,7 @@ const props = defineProps({
 const form = useForm({
     product_id: props.product.id,
     qty: 1,
+    author: props.auth.id,
 });
 
 const addToCart = () => {

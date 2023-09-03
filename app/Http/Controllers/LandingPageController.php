@@ -14,40 +14,77 @@ use Inertia\Inertia;
 
 class LandingPageController extends Controller
 {
+    //simpanan
     function index(){
-        return Inertia::render('Customer/Index',[
-            'categories' => Categories::latest()->take(3)->get(),
-            'carts' => Cart::with('product')->get(),
-            'heroes' => Hero::all(),
-            'contact' => Contact::all(),
-            'auth' => auth()->user(),
-        ]);
+        if (auth()->check()) {
+            $auth = auth()->user();
+            return Inertia::render('Customer/Index',[
+                'categories' => Categories::latest()->take(3)->get(),
+                'carts' => Cart::with('product')->where('author', $auth->id)->get(),
+                'heroes' => Hero::all(),
+                'contact' => Contact::all(),
+                'auth' => $auth,
+            ]);
+        } else {
+            $auth = auth()->user();
+            return Inertia::render('Customer/Index',[
+                'categories' => Categories::latest()->take(3)->get(),
+                'carts' => Cart::with('product')->where('author', $auth)->get(),
+                'heroes' => Hero::all(),
+                'contact' => Contact::all(),
+                'auth' => $auth,
+            ]);
+        }
     }
     function indexProducts(){
-        // dd(request('search'));
-        return Inertia::render('Customer/Products/Index',[
-            'products' => Products::latest()->get(),
-            'categories' => Categories::all(),
-            'carts' => Cart::with('product')->get(),
-            'auth' => auth()->user(),
-        ]);
+        if(auth()->check()){
+            $auth = auth()->user();
+            return Inertia::render('Customer/Products/Index',[
+                'products' => Products::latest()->get(),
+                'categories' => Categories::all(),
+                'carts' => Cart::with('product')->where('author',$auth->id)->get(),
+                'auth' => auth()->user(),
+            ]);
+        }else{
+            $auth = auth()->user();
+            return Inertia::render('Customer/Products/Index',[
+                'products' => Products::latest()->get(),
+                'categories' => Categories::all(),
+                'carts' => Cart::with('product')->where('author',$auth)->get(),
+                'auth' => auth()->user(),
+            ]); 
+        }
     }
     function showProduct($id){
-        return Inertia::render('Customer/Products/Product',[
-            'product' => Products::findOrFail($id),
-            'carts' => Cart::with('product')->latest()->get(),
-            'auth' => auth()->user(),
-        ]);
+        if(auth()->check()){
+            $auth = auth()->user();
+            return Inertia::render('Customer/Products/Product',[
+                'product' => Products::findOrFail($id),
+                'carts' => Cart::with('product')->where('author',$auth->id)->get(),
+                'auth' => auth()->user(),
+            ]);
+        }else{
+            $auth = auth()->user();
+            return Inertia::render('Customer/Products/Product',[
+                'product' => Products::findOrFail($id),
+                'carts' => Cart::with('product')->where('author',$auth)->get(),
+                'auth' => '0',
+            ]);
+        }
     }
     function addToCart(Request $request){
-
-        $validasiData = $request->validate([
-            'product_id' => 'required',
-            'qty' => 'required',
-        ]);
-        // dd($validasiData);
-        Cart::create($validasiData);
-        return redirect()->back()->with('message','Yeay kamu telah menaruhnya ke keranjang');
+        if(auth()->check()){
+            $validasiData = $request->validate([
+                'product_id' => 'required',
+                'qty' => 'required',
+                'author' => 'required'
+            ]);
+            // dd($validasiData);
+            Cart::create($validasiData);
+            return redirect()->back()->with('message','Yeay kamu telah menaruhnya ke keranjang');
+        }else{
+            return redirect('/signin');
+        }
     }
     function deleteInCart($id){
         $cart = Cart::find($id);

@@ -187,6 +187,10 @@ const props = defineProps({
                                                             +
                                                         </Link>
                                                     </div>
+                                                    <label for="">{{
+                                                        cart.product.price *
+                                                        cart.qty
+                                                    }}</label>
                                                 </div>
                                             </div>
                                         </div>

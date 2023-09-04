@@ -18,7 +18,7 @@ const submit = () => {
 </script>
 <template>
     <Head title="SignUp"></Head>
-    <section class="px-12 py-12 bg-light-primary dark:bg-dark-primary h-screen">
+    <section class="px-12 py-12 bg-light-primary dark:bg-dark-primary h-full">
         <div class="mx-auto text-center m-8">
             <h1
                 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-light-tail-100 md:text-5xl lg:text-6xl dark:text-dark-nav-100"
@@ -100,7 +100,7 @@ const submit = () => {
                 <PrimaryButton
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
-                    class="text-white bg-light-tail-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-dark-nav-100 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    class="text-white bg-light-tail-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-auto sm:w-auto px-5 py-2.5 text-center dark:bg-dark-nav-100 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                     Submit
                 </PrimaryButton>

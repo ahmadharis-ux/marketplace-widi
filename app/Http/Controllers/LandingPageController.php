@@ -92,7 +92,6 @@ class LandingPageController extends Controller
 
         return redirect()->back();
     }
-    
     function addQtyInCart(Request $request, $id){
             // Temukan objek Cart berdasarkan ID
             $cart = Cart::findOrFail($id);

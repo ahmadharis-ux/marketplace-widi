@@ -15,6 +15,15 @@ const props = defineProps({
         default: () => ({}),
     },
 });
+const totalAmount = computed(() => {
+    let total = 0;
+    for (const cart of props.carts) {
+        if (cart.isChecked) {
+            total += cart.qty * cart.product.price;
+        }
+    }
+    return total;
+});
 </script>
 <template>
     <div class="navbar bg-light-second dark:bg-dark-second sticky top-0 z-50">
@@ -187,10 +196,6 @@ const props = defineProps({
                                                             +
                                                         </Link>
                                                     </div>
-                                                    <label for="">{{
-                                                        cart.product.price *
-                                                        cart.qty
-                                                    }}</label>
                                                 </div>
                                             </div>
                                         </div>
